@@ -31,6 +31,11 @@ class RegexMasker:
         for mi in self.masking_instructions:
             content = re.sub(mi.regex, mi.mask_with_wrapped, content)
         return content
+    
+    def reduce(self,content: str):
+        for mi in self.masking_instructions:
+            content = re.sub("("+mi.mask_with_wrapped+" ?){2, }",mi.mask_with_wrapped,content)#grouping consecutive masks
+        return content
 
 
 # Some masking examples
@@ -60,6 +65,7 @@ class LogMasker:
 
     def mask(self, content: str):
         if self.masker is not None:
-            return self.masker.mask(content)
+            content= self.masker.mask(content)
+            content= self.masker.reduce(content)
         else:
             return content
