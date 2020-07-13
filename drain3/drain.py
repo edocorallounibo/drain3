@@ -226,7 +226,7 @@ class Drain:
         return cluster_id
 
     def add_log_message(self, content: str):
-        #content = content.strip()
+        content = content.strip()
         content_tokens = content.split()
         match_cluster = self.tree_search(self.root_node, content_tokens)
 
