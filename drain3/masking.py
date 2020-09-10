@@ -67,5 +67,6 @@ class LogMasker:
         if self.masker is not None:
             content= self.masker.mask(content)
             content= self.masker.reduce(content)
+            return content
         else:
             return content
