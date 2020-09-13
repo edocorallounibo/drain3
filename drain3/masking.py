@@ -34,7 +34,7 @@ class RegexMasker:
     
     def reduce(self,content: str):
         for mi in self.masking_instructions:
-            content = re.sub((mi.mask_with_wrapped ?){2, },mi.mask_with_wrapped,content)#grouping consecutive masks
+            content = re.sub(re.compile(r'((?<=[^A-Za-z0-9])|^)('+re.escape(mi.mask_with_wrapped)+r' ?)+((?=[^A-Za-z0-9])|$)'),mi.mask_with_wrapped,content)#grouping consecutive masks
         return content
 
 
